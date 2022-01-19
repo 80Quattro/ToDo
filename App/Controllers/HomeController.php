@@ -10,6 +10,14 @@ class HomeController
 {
     public function index(): string
     {
-        return (new View('index'))->render();
+        return (
+            new View(
+                templatePath: 'indexTemplate', 
+                viewPath: 'home', 
+                params: [
+                    'title' => 'ToDo App', 
+                ]
+            )
+        )->render();
     }
 }
