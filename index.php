@@ -8,6 +8,8 @@ use App\Router;
 
 require_once(__DIR__ . '/vendor/autoload.php');
 
+define('VIEWS_DIR_PATH', __DIR__ . '/Views/');
+
 $request = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
 

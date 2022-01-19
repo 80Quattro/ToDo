@@ -15,7 +15,7 @@ class App
     public function run()
     {
         // TODO try catch
-        $this->router->resolve();
+        echo $this->router->resolve();
     }
 
 }
