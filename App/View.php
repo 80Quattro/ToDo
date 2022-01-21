@@ -26,6 +26,15 @@ class View
             throw new ViewNotFoundException();
         }
 
+        $params = $this->params;
+
+        $stylesheetsString = '';
+        if($params['stylesheets']) {
+            $stylesheetsString = $this->generateStylesheetsString($params['stylesheets']);
+        }
+
+        echo $stylesheetsString;
+
         ob_start();
 
         include $viewPath;
@@ -37,5 +46,21 @@ class View
         include $templatePath;
 
         return (string) ob_get_clean();
+    }
+
+    private function generateStylesheetsString(): string
+    {
+        $stylesheetsString = '';
+        foreach($this->params['stylesheets'] as $link) {
+            
+            // if link is to local file
+            $dir = 'Views/';
+            if(strpos($link, 'http') !== false) {
+                $dir = '';
+            }
+
+            $stylesheetsString .= '<link href="' . $dir .  $link . '" rel="stylesheet">';
+        }
+        return $stylesheetsString;
     }
 }

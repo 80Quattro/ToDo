@@ -15,7 +15,11 @@ class HomeController
                 templatePath: 'indexTemplate', 
                 viewPath: 'home', 
                 params: [
-                    'title' => 'ToDo App', 
+                    'title' => 'ToDo App',
+                    'stylesheets' => [
+                        'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
+                        'css/index.css'
+                    ]
                 ]
             )
         )->render();

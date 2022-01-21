@@ -8,13 +8,13 @@
   <title><?php echo $this->params['title'] ?></title>
   <meta name="description" content="A simple HTML5 Template for new projects.">
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <?php echo $stylesheetString ?>
 
 </head>
 
 <body>
-    <?php echo $viewString; ?>
-  <!-- your content here... -->
+    <?php echo $viewString ?>
+
   <script src="js/scripts.js"></script>
 </body>
 </html>
