@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 use App\App;
 use App\Controllers\HomeController;
+use App\Controllers\RoomController;
 use App\Router;
 
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -16,6 +17,8 @@ $method = $_SERVER['REQUEST_METHOD'];
 $router = new Router($request, $method);
 
 $router
-    ->get('/', [HomeController::class, 'index']);
+    ->get('/', [HomeController::class, 'index'])
+    ->post('/create', [RoomController::class, 'create'])
+    ->post('/join', [RoomController::class, 'join']);
 
 (new App($router))->run();
