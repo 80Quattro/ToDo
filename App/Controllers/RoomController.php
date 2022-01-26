@@ -16,6 +16,9 @@ class RoomController
                 viewPath: 'room', 
                 params: [
                     'title' => 'ToDo App',
+                    'scripts' => [
+                        'js/index.js'
+                    ]
                 ]
             )
         )->render();

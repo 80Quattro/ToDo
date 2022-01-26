@@ -28,12 +28,15 @@ class View
 
         $params = $this->params;
 
-        $stylesheetsString = '';
+        $loadStylesheetsString = '';
         if($params['stylesheets']) {
-            $stylesheetsString = $this->generateStylesheetsString($params['stylesheets']);
+            $loadStylesheetsString = $this->generateStylesheetsString($params['stylesheets']);
         }
 
-        echo $stylesheetsString;
+        $loadScriptsString = '';
+        if($params['scripts']) {
+            $loadScriptsString = $this->generateScriptsString($params['scripts']);
+        }
 
         ob_start();
 
@@ -62,5 +65,20 @@ class View
             $stylesheetsString .= '<link href="' . $dir .  $link . '" rel="stylesheet">';
         }
         return $stylesheetsString;
+    }
+
+    private function generateScriptsString(): string
+    {
+        $scriptsScript = '';
+        foreach($this->params['scripts'] as $link) {
+            
+            $dir = 'Views';
+            if(strpos($link, 'http') != false) {
+                $dir = '';
+            }
+
+            $scriptsScript .= '<script src="' . $link . '"></script>';
+        }
+        return $scriptsScript;
     }
 }
