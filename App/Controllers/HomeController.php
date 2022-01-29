@@ -18,6 +18,9 @@ class HomeController
                     'title' => 'ToDo App',
                     'stylesheets' => [
                         'css/index.css'
+                    ],
+                    'scripts' => [
+                        'js/index.js'
                     ]
                 ]
             )

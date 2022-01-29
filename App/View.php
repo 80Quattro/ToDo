@@ -72,12 +72,12 @@ class View
         $scriptsScript = '';
         foreach($this->params['scripts'] as $link) {
             
-            $dir = 'Views';
+            $dir = 'Views/';
             if(strpos($link, 'http') != false) {
                 $dir = '';
             }
 
-            $scriptsScript .= '<script src="' . $link . '"></script>';
+            $scriptsScript .= '<script src="' . $dir . $link . '"></script>';
         }
         return $scriptsScript;
     }
