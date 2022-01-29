@@ -20,7 +20,7 @@ class HomeController
                         'css/index.css'
                     ],
                     'scripts' => [
-                        'js/index.js'
+                        'js/home.js'
                     ]
                 ]
             )

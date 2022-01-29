@@ -10,7 +10,7 @@ class RoomController
 {
     public function create(): string
     {
-        return (    
+        return (
             new View(
                 templatePath: 'indexTemplate', 
                 viewPath: 'room', 
