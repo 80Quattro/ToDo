@@ -4,12 +4,14 @@ declare(strict_types = 1);
 
 namespace App\Controllers;
 
+use App\Models\Room;
 use App\View;
 
 class RoomController 
 {
     public function create(): string
     {
+        //echo (new Room)->create("AAAAA");
         return (
             new View(
                 templatePath: 'indexTemplate', 

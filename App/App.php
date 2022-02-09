@@ -7,15 +7,22 @@ namespace App;
 class App
 {
 
-    public function __construct(private Router $router)
+    private static DBConfig $dbConfig;
+
+    public function __construct(private Router $router, DBConfig $dbConfig)
     {
-        
+        static::$dbConfig = $dbConfig;
     }
 
     public function run()
     {
-        // TODO try catch
+        // TODO try catch and 404 page
         echo $this->router->resolve();
+    }
+
+    public static function getDBConfig(): DBConfig
+    {
+        return static::$dbConfig;
     }
 
 }
