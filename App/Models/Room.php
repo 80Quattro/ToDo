@@ -9,7 +9,7 @@ use App\Model;
 class Room extends Model
 {
 
-    public function create(string $name)//: string
+    public function create(string $name): string
     {
         $sql = "INSERT INTO rooms (name, owner) VALUES (UUID_SHORT(), ?)";
         $stmt = $this->db->prepare($sql);

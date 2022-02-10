@@ -18,7 +18,7 @@ define('VIEWS_DIR_PATH', __DIR__ . '/Views/');
 $request = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
 
-$router = new Router($request, $method);
+$router = new Router($request, $method, $_POST, $_GET);
 
 $router
     ->get('/', [HomeController::class, 'index'])
@@ -32,3 +32,4 @@ $router
 )->run();
 
 //phpinfo();
+//var_dump($_POST);

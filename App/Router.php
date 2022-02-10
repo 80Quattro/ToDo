@@ -11,7 +11,12 @@ class Router
 
     private array $routes;
 
-    public function __construct(private string $request, private string $method)
+    public function __construct(
+        private string $request, 
+        private string $method, 
+        private array $post = array(), 
+        private array $get = array()
+        )
     {
         
     }
@@ -49,7 +54,7 @@ class Router
             [$class, $method] = $action;
 
             if(class_exists($class)) {
-                $class = new $class();
+                $class = new $class($this->post, $this->get);
 
                 if(method_exists($class, $method)) {
                     return call_user_func_array([$class, $method], []);
