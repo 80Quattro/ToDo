@@ -29,12 +29,12 @@ class View
         $params = $this->params;
 
         $loadStylesheetsString = '';
-        if($params['stylesheets']) {
+        if(isset($params['stylesheets'])) {
             $loadStylesheetsString = $this->generateStylesheetsString($params['stylesheets']);
         }
 
         $loadScriptsString = '';
-        if($params['scripts']) {
+        if(isset($params['scripts'])) {
             $loadScriptsString = $this->generateScriptsString($params['scripts']);
         }
 

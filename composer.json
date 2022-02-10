@@ -1,6 +1,6 @@
 {
     "require": {
-        
+        "vlucas/phpdotenv": "V5"
     },
     "autoload": {
         "psr-4": {
