@@ -23,13 +23,10 @@ $router = new Router($request, $method, $_POST, $_GET);
 $router
     ->get('/', [HomeController::class, 'index'])
     ->post('/create', [RoomController::class, 'create'])
-    ->post('/join', [RoomController::class, 'join']);
+    ->get('/room', [RoomController::class, 'join']);
 
 (new App(
     $router, 
     new DBConfig($_ENV)
     )
 )->run();
-
-//phpinfo();
-//var_dump($_POST);

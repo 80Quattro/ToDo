@@ -10,31 +10,29 @@ use App\View;
 
 class RoomController extends Controller
 {
-    public function create(): string
+    public function create(): void
     {
-        echo (new Room)->create($this->post['name']);
-        return (
-            new View(
-                templatePath: 'indexTemplate', 
-                viewPath: 'room', 
-                params: [
-                    'title' => 'ToDo App',
-                    'scripts' => [
-                        'js/index.js'
-                    ]
-                ]
-            )
-        )->render();
+        $roomId = (new Room)->create($this->post['name']);
+        header("Location: /room?id=$roomId");
     }
 
     public function join(): string
     {
+        (new Room)->get($this->get['id']);
         return (
             new View(
                 templatePath: 'indexTemplate', 
                 viewPath: 'room', 
                 params: [
                     'title' => 'ToDo App',
+                    'stylesheets' => [
+                        'css/index.css',
+                        'css/room.css'
+                    ],
+                    'scripts' => [
+                        'js/cookies.js',
+                        'js/room.js'
+                    ]
                 ]
             )
         )->render();

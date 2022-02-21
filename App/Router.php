@@ -40,7 +40,35 @@ class Router
 
     public function resolve()
     {
+        // first check the perfect match (with no params) - highest priotity
+        // than check match with param
+
+        $this->request = explode('?', $this->request)[0];
         $action = $this->routes[$this->method][$this->request];
+        //$action = explode('?', $action)[0];
+
+        /* $action = $this->routes[$this->method];
+        foreach($action as $routeName => $route) {
+            echo "<pre>";
+            var_dump($this->routes);
+            echo $this->request;
+            echo $this->method;
+            echo "</pre>";
+
+            $request = explode('/', $this->request);
+            var_dump($request);
+            $routeName = explode('/', $routeName);
+            var_dump($routeName);
+
+            if(count($request) === count($routeName)) {
+                $dismatch = false;
+                for($i = 0; $i < count($request); $i++) {
+                    if(str_starts_with($route, ':')) {
+
+                    }
+                }
+            }
+        } */
 
         if($action == null) {
             throw new RouteNotFoundException();
