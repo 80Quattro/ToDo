@@ -18,12 +18,15 @@ define('VIEWS_DIR_PATH', __DIR__ . '/Views/');
 $request = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
 
-$router = new Router($request, $method, $_POST, $_GET);
+$body = json_decode(file_get_contents('php://input')) ?? (object) array();
+
+$router = new Router($request, $method, $body, $_POST, $_GET);
 
 $router
     ->get('/', [HomeController::class, 'index'])
     ->post('/create', [RoomController::class, 'create'])
-    ->get('/room', [RoomController::class, 'join']);
+    ->get('/room', [RoomController::class, 'join'])
+    ->post('/room/addToDo', [RoomController::class, 'addToDo']);
 
 (new App(
     $router, 

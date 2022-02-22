@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Controller;
 use App\Models\Room;
+use App\Models\ToDo;
 use App\View;
 
 class RoomController extends Controller
@@ -36,5 +37,11 @@ class RoomController extends Controller
                 ]
             )
         )->render();
+    }
+
+    public function addToDo(): string
+    {
+        //(new ToDo)->create($this->post['name'], $this->post['description']);
+        return json_encode($this->body);
     }
 }
