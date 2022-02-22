@@ -8,9 +8,12 @@ use App\Model;
 
 class ToDo extends Model
 {
-    public function create(string $name, string $description = ''): string
+    public function create(string $roomId, string $name, string $description, string $owner): void
     {
-        return '';
+        // TODO try ... catch
+        $sql = "INSERT INTO todos (roomId, name, description, owner, status) VALUES (?, ?, ?, ?, 'TODO')";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$roomId, $name, $description, $owner]);
     }
 
     public function getByRoomId(string $roomId): void

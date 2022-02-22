@@ -41,7 +41,12 @@ class RoomController extends Controller
 
     public function addToDo(): string
     {
-        //(new ToDo)->create($this->post['name'], $this->post['description']);
-        return json_encode($this->body);
+        (new ToDo)->create(
+            $this->body->roomId,
+            $this->body->name, 
+            $this->body->description,
+            $this->body->owner
+        );
+        return json_encode( array('status' => 'SUCCESS') );
     }
 }

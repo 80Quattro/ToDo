@@ -1,3 +1,6 @@
+var url = new URL(window.location.href);
+var roomId = url.searchParams.get("id");
+
 var setUsernameModal = new bootstrap.Modal(document.getElementById("setUsernameModal"), {
     keyboard: false
 });
@@ -43,8 +46,10 @@ function addToDo(ToDoName, ToDodescription)
         }
     };
     var data = {
+        roomId: roomId,
         name: ToDoName,
-        description: ToDodescription
+        description: ToDodescription,
+        owner: getCookie("username")
     };
     xhttp.send(JSON.stringify(data));
 }
