@@ -16,8 +16,11 @@ class ToDo extends Model
         $stmt->execute([$roomId, $name, $description, $owner]);
     }
 
-    public function getByRoomId(string $roomId): void
+    public function getAllByRoomId(string $roomId): array
     {
-        
+        $sql = "SELECT name, description, owner, status FROM todos WHERE roomId = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$roomId]);
+        return $stmt->fetchAll();
     }
 }

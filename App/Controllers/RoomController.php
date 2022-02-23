@@ -19,7 +19,7 @@ class RoomController extends Controller
 
     public function join(): string
     {
-        (new Room)->get($this->get['id']);
+        (new ToDo)->getAllByRoomId($this->get['id']);
         return (
             new View(
                 templatePath: 'indexTemplate', 
@@ -49,4 +49,14 @@ class RoomController extends Controller
         );
         return json_encode( array('status' => 'SUCCESS') );
     }
+
+    public function getToDos(): string
+    {
+        $todos = (new ToDo)->getAllByRoomId($this->body->roomId);
+        return json_encode([
+            'status' => 'SUCCESS',
+            'todos' => $todos
+        ]);
+    }
+
 }

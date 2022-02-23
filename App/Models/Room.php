@@ -23,12 +23,4 @@ class Room extends Model
         return $stmt->fetchColumn();
     }
 
-    public function get(string $id): array
-    {
-        $sql = "SELECT name, description, owner, status FROM todos WHERE roomId = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
-        return $stmt->fetchAll();
-    }
-
 }
