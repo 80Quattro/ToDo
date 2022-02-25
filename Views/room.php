@@ -1,16 +1,19 @@
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col" id="toDo">
             <h3>
                 ToDo
-                <button type="button" class="btn btn-primary" id="addToDoButton" data-bs-toggle="modal" data-bs-target="#addToDoModal">Add</button>
+                <button type="button" class="btn btn-primary" id="addToDoButton" data-bs-toggle="modal" data-bs-target="#addToDoModal">+</button>
             </h3>
+            <div class="content"></div>
         </div>
-        <div class="col">
+        <div class="col" id="inProgress">
             <h3>In progress</h3>
+            <div class="content"></div>
         </div>
-        <div class="col">
+        <div class="col" id="done">
             <h3>Done</h3>
+            <div class="content"></div>
         </div>
     </div>
 </div>
