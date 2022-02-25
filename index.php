@@ -27,7 +27,8 @@ $router
     ->post('/create', [RoomController::class, 'create'])
     ->get('/room', [RoomController::class, 'join'])
     ->post('/room/addToDo', [RoomController::class, 'addToDo'])
-    ->post('/room/getToDos', [RoomController::class, 'getToDos']);
+    ->post('/room/getToDos', [RoomController::class, 'getToDos'])
+    ->put('/room/changeToDo', [RoomController::class, 'changeToDo']);
 
 (new App(
     $router, 

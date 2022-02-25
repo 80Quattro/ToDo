@@ -45,7 +45,9 @@ function addToDo(ToDoName, ToDodescription)
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(this.responseText);
             todos.push({
+                'id': response.insertedId,
                 'name': ToDoName,
                 'description': ToDodescription,
                 'owner': getCookie("username"),
@@ -100,6 +102,11 @@ function showTodos()
         
         var cardBodyDiv = document.createElement("div");
         cardBodyDiv.className = "card-body";
+
+        var idHiddenInput = document.createElement("input");
+        idHiddenInput.setAttribute("type", "hidden");
+        idHiddenInput.setAttribute("value", todo.id);
+        idHiddenInput.className = "todoId";
         
         var cardTitle = document.createElement("h5");
         cardTitle.className = "card-title";
@@ -118,19 +125,22 @@ function showTodos()
         cardText.className = "card-text";
         cardText.innerHTML = todo.description;
 
+        cardBodyDiv.appendChild(idHiddenInput);
         cardBodyDiv.appendChild(cardTitle);
         cardBodyDiv.appendChild(cardSubitle);
         cardBodyDiv.appendChild(cardText);
 
         var nextStatusButton = document.createElement("button");
         nextStatusButton.setAttribute("type", "button");
-        nextStatusButton.className = "btn btn-primary";
+        nextStatusButton.className = "btn btn-primary next";
         nextStatusButton.innerHTML = ">";
+        nextStatusButton.addEventListener("click", changeToDo);
 
         var previousStatusButton = document.createElement("button");
         previousStatusButton.setAttribute("type", "button");
-        previousStatusButton.className = "btn btn-primary";
+        previousStatusButton.className = "btn btn-primary prev";
         previousStatusButton.innerHTML = "<";
+        previousStatusButton.addEventListener("click", changeToDo);
 
         switch(todo.status) {
             case 'TODO':
@@ -138,9 +148,9 @@ function showTodos()
                 cardBodyDiv.appendChild(nextStatusButton);
                 break;
             case 'INPROGRESS':
-                cardBodyDiv.appendChild(nextStatusButton);
-                cardBodyDiv.appendChild(deleteButton);
                 cardBodyDiv.appendChild(previousStatusButton);
+                cardBodyDiv.appendChild(deleteButton);
+                cardBodyDiv.appendChild(nextStatusButton);
                 statusDiv = inProgressDiv;
                 break;
             case 'DONE':
@@ -155,4 +165,58 @@ function showTodos()
 
     })
 
+}
+
+function changeToDo(e) {
+    var id = e.target.parentNode.children[0].value;
+
+    var status = null;
+    var currStatus = e.target.parentNode.parentNode.parentNode.parentNode.id;
+
+    console.log(e.target.classList);
+
+    if(e.target.classList.contains('next')) {
+        switch(currStatus) {
+            case "toDo":
+                status = "INPROGRESS";
+                break;
+            case "inProgress":
+                status = "DONE";
+                break;
+        }
+    }
+
+    if(e.target.classList.contains('prev')) {
+        switch(currStatus) {
+            case "inProgress":
+                status = "TODO";
+                break;
+            case "done":
+                status = "INPROGRESS";
+                break;
+        }
+    }
+    
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("PUT", "/room/changeToDo", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            for(var i = 0; i < todos.length; i++) {
+                if(todos[i].id == id) {
+                    todos[i].status = status;
+                }
+            }
+
+            showTodos();
+        }
+    };
+    var data = {
+        todoId: id,
+        toChange: {
+            'status': status
+        }
+    };
+    xhttp.send(JSON.stringify(data));
 }

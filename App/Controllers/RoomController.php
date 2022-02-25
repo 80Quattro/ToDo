@@ -41,13 +41,16 @@ class RoomController extends Controller
 
     public function addToDo(): string
     {
-        (new ToDo)->create(
+        $insertedId = (new ToDo)->create(
             $this->body->roomId,
             $this->body->name, 
             $this->body->description,
             $this->body->owner
         );
-        return json_encode( array('status' => 'SUCCESS') );
+        return json_encode( array(
+                'status' => 'SUCCESS',
+                'insertedId' => $insertedId
+            ) );
     }
 
     public function getToDos(): string
@@ -56,6 +59,14 @@ class RoomController extends Controller
         return json_encode([
             'status' => 'SUCCESS',
             'todos' => $todos
+        ]);
+    }
+
+    public function changeToDo(): string
+    {
+        (new ToDo)->change($this->body->todoId, (array) $this->body->toChange);
+        return json_encode([
+            'status' => 'SUCCESS',
         ]);
     }
 
