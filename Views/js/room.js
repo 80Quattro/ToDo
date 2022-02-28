@@ -111,11 +111,6 @@ function showTodos()
         var cardTitle = document.createElement("h5");
         cardTitle.className = "card-title";
         cardTitle.innerHTML = todo.name;
-
-        var deleteButton = document.createElement("button");
-        deleteButton.setAttribute("type", "button");
-        deleteButton.className = "btn btn-danger";
-        deleteButton.innerHTML = "x";
         
         var cardSubitle = document.createElement("h6");
         cardSubitle.className = "card-subtitle";
@@ -141,6 +136,12 @@ function showTodos()
         previousStatusButton.className = "btn btn-primary prev";
         previousStatusButton.innerHTML = "<";
         previousStatusButton.addEventListener("click", changeToDo);
+
+        var deleteButton = document.createElement("button");
+        deleteButton.setAttribute("type", "button");
+        deleteButton.className = "btn btn-danger";
+        deleteButton.innerHTML = "x";
+        deleteButton.addEventListener("click", deleteToDo);
 
         switch(todo.status) {
             case 'TODO':
@@ -217,6 +218,28 @@ function changeToDo(e) {
         toChange: {
             'status': status
         }
+    };
+    xhttp.send(JSON.stringify(data));
+}
+
+function deleteToDo(e) {
+    var id = e.target.parentNode.children[0].value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("DELETE", "/room/deleteToDo", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            for(var i = 0; i < todos.length; i++) {
+                if(todos[i].id == id) {
+                    todos.splice(i, 1);
+                }
+            }
+            showTodos();
+        }
+    };
+    var data = {
+        todoId: id,
     };
     xhttp.send(JSON.stringify(data));
 }

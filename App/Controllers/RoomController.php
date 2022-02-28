@@ -70,4 +70,12 @@ class RoomController extends Controller
         ]);
     }
 
+    public function deleteToDo(): string
+    {
+        (new ToDo)->delete($this->body->todoId);
+        return json_encode([
+            'status' => 'SUCCESS',
+        ]);
+    }
+
 }

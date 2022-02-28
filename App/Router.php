@@ -45,6 +45,11 @@ class Router
         return $this->register($request, 'PUT', $action);
     }
 
+    public function delete(string $request, callable|array $action): self
+    {
+        return $this->register($request, 'DELETE', $action);
+    }
+
     public function resolve()
     {
         // first check the perfect match (with no params) - highest priotity

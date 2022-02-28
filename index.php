@@ -28,7 +28,8 @@ $router
     ->get('/room', [RoomController::class, 'join'])
     ->post('/room/addToDo', [RoomController::class, 'addToDo'])
     ->post('/room/getToDos', [RoomController::class, 'getToDos'])
-    ->put('/room/changeToDo', [RoomController::class, 'changeToDo']);
+    ->put('/room/changeToDo', [RoomController::class, 'changeToDo'])
+    ->delete('/room/deleteToDo', [RoomController::class, 'deleteToDo']);
 
 (new App(
     $router, 

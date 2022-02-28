@@ -37,4 +37,11 @@ class ToDo extends Model
         $stmt->execute();
     }
 
+    public function delete(string $id): void
+    {
+        $sql = "DELETE FROM todos WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+    }
+
 }
