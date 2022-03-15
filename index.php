@@ -10,9 +10,11 @@ use App\Router;
 
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// library to read .env file
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+// path to directory with views
 define('VIEWS_DIR_PATH', __DIR__ . '/Views/');
 
 $request = $_SERVER['REQUEST_URI'];
