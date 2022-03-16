@@ -18,11 +18,9 @@ class App
 
     public function run()
     {
-        // TODO try catch and 404 page
         try {
             echo $this->router->resolve();
-        }
-        catch(RouteNotFoundException $e) {
+        } catch(RouteNotFoundException $e) {
             echo Controller::page404();
         }
     }

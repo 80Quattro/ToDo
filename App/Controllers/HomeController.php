@@ -23,7 +23,7 @@ class HomeController extends Controller
                     ],
                     'scripts' => [
                         'js/home.js'
-                    ]
+                    ],
                 ]
             )
         )->render();

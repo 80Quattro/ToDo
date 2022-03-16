@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Exceptions\DataNotFoundException;
 use App\Model;
+use LDAP\Result;
 
 class Room extends Model
 {
@@ -21,6 +23,18 @@ class Room extends Model
         $stmt->execute();
         
         return $stmt->fetchColumn();
+    }
+
+    public function get(string $roomId): array
+    {
+        $sql = "SELECT name, create_date, owner FROM rooms WHERE name = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$roomId]);
+        $result = $stmt->fetch();
+        if(!$result) {
+            throw new DataNotFoundException();
+        }
+        return $result;
     }
 
 }

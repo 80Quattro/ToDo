@@ -5,9 +5,11 @@ declare(strict_types = 1);
 namespace App\Controllers;
 
 use App\Controller;
+use App\Exceptions\DataNotFoundException;
 use App\Models\Room;
 use App\Models\ToDo;
 use App\View;
+use stdClass;
 
 class RoomController extends Controller
 {
@@ -19,7 +21,14 @@ class RoomController extends Controller
 
     public function join(): string
     {
-        (new ToDo)->getAllByRoomId($this->get['id']);
+        $message = '';
+        
+        try {
+            (new Room)->get($this->get['id']);
+        } catch( DataNotFoundException ) {
+            $message = 'RoomNotFound';
+        }
+
         return (
             new View(
                 templatePath: 'indexTemplate', 
@@ -33,7 +42,8 @@ class RoomController extends Controller
                     'scripts' => [
                         'js/cookies.js',
                         'js/room.js'
-                    ]
+                    ],
+                    'message' => $message,
                 ]
             )
         )->render();
