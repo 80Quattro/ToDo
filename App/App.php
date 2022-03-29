@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace App;
 
+use App\Exceptions\RouteNotFoundException;
+
 class App
 {
 
@@ -16,8 +18,11 @@ class App
 
     public function run()
     {
-        // TODO try catch and 404 page
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch(RouteNotFoundException $e) {
+            echo Controller::page404();
+        }
     }
 
     public static function getDBConfig(): DBConfig

@@ -2,19 +2,3 @@ body {
     background-color: #161d20;
     color: #cccccc;
 }
-
-.col {
-    text-align: center;
-}
-
-.container {
-    padding-top: 10em;
-}
-
-.row {
-    margin-bottom: 3em;
-}
-
-.btn {
-    width: 50%;
-}

@@ -18,11 +18,12 @@ class HomeController extends Controller
                 params: [
                     'title' => 'ToDo App',
                     'stylesheets' => [
-                        'css/index.css'
+                        'css/index.css',
+                        'css/home.css'
                     ],
                     'scripts' => [
                         'js/home.js'
-                    ]
+                    ],
                 ]
             )
         )->render();

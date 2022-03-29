@@ -10,7 +10,6 @@ abstract class Model
 
     public function __construct()
     {
-        //TODO - credentials 
         $this->db = new DataBase(App::getDBConfig());
     }
 }
