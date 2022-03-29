@@ -2,7 +2,7 @@
   
   <div class="container">
     <div class="row">
-      <h2>Nie znaleziono pokoju o podanej nazwie</h2>
+      <h2>Room not found</h2>
     </div>
   </div>
 
